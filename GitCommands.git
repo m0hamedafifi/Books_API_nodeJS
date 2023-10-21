@@ -2,7 +2,7 @@
 $ git config --global user.name "Your Name Comes Here"
 $ git config --global user.email you@yourdomain.example.com
 
--- to check user name and mail 
+-- To check user name and mail 
 $ git config --get user.name
 $ git config --get user.email
 
@@ -24,5 +24,17 @@ $ git status
 -- To create file (.any type you want) 
 $ touch README.md
 
--- To commit file
+-- To commit all files to unstage
 $ git add .
+
+-- To commit specific file to unstage
+$ git add "file name"
+
+-- To commit files on unstage to stage
+$ git commit -m "commit message comes here"
+
+-- To git history of logs
+$ git log
+
+
+
