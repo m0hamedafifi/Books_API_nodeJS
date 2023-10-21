@@ -1,0 +1,28 @@
+-- To add user name and email
+$ git config --global user.name "Your Name Comes Here"
+$ git config --global user.email you@yourdomain.example.com
+
+-- to check user name and mail 
+$ git config --get user.name
+$ git config --get user.email
+
+-- To create local repository 
+$ git init "my project"
+
+-- To clone existing repository from remote server
+$ git clone https://github.com/user/repo.git
+
+-- To check all directories
+$ ls -a
+
+-- To open  
+$ cd my_project/
+
+-- To see status of files in the directory
+$ git status
+
+-- To create file (.any type you want) 
+$ touch README.md
+
+-- To commit file
+$ git add .
