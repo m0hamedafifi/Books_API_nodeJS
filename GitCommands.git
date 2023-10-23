@@ -57,8 +57,17 @@ $ git merge sourceBranchName
 -- Deleting Branches
 $ git branch -d targetBranchName
 
+-- check if there remote links 
+$ git remote -v
+
+-- Add remote link
+$ git remote add origin https://github.com/username/repo.git
+
 -- Pushing changes to remote repo
 $ git push origin your-branch-name
+
+-- pull code from repository
+$ git pull origin master
 
 -- To clear timeline 
 $ clear
