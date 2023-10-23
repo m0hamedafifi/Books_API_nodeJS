@@ -36,5 +36,30 @@ $ git commit -m "commit message comes here"
 -- To git history of logs
 $ git log
 
+-- To checkout a particular version or branch
+$ git checkout master (or any other branch)
 
+-- To checkout a particular version
+$ git checkout HEAD~1
+
+-- To get all branches
+$ git branch -a
+
+-- to create branch 
+$ git branch new-branch
+
+-- Switching between branches To switch to branch (if this branch not existing will create new one)
+$ git checkout -b your-branch-name
+
+-- Merging two branches
+$ git merge sourceBranchName
+
+-- Deleting Branches
+$ git branch -d targetBranchName
+
+-- Pushing changes to remote repo
+$ git push origin your-branch-name
+
+-- To clear timeline 
+$ clear
 
