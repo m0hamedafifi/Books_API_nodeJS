@@ -1,0 +1,7 @@
+exports.queryList = {
+
+    getStoreListQuery : `SELECT STORE_ID, STORE_NAME, DESCRIPTION, STORE_CODE, CREATED_ON, CREATED_BY, ACTIVE
+    FROM BMS.STORE;`
+
+};
+
