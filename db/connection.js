@@ -1,9 +1,9 @@
 const pool = require('./pool');
 
 
-module.exports.dbQuery = {
+exports.dbQuery = (queryText, queryParams) =>{
 return new Promise((resolve, reject) => {
-    pool.query(queryText,queryParams)
+    pool.query( queryText,queryParams)
     .then((result) => {
         resolve(result);
     }).catch((err) => {
