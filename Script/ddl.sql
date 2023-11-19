@@ -43,3 +43,8 @@ CREATE TABLE bms.store (
 	active bool NOT NULL,
 	CONSTRAINT store_pkey PRIMARY KEY (store_id)
 );
+
+
+
+alter table BMS.book
+add column price numeric(5,3)
