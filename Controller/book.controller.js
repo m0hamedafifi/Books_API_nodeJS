@@ -1,12 +1,17 @@
 const queries = require("../db/query");
 const dbConnection = require("../db/connection");
+const Logger = require('../services/logger');
 
+const logger = new Logger("book.controller");
 module.exports.getBookList = async (req, res) => {
   try {
     let bookQuery = queries.queryList.getBookListQuery;
     let values = await dbConnection.dbQuery(bookQuery);
-
-    return res.status(200).json(JSON.stringify(values.rows));
+    
+    if (values.rowCount === 0) throw "No books found";
+    logger.info("return Books", values.rows)
+    return res.status(200).send({ status: true, data: values.rows });
+    // return res.status(200).json(JSON.stringify(values.rows));
   } catch (error) {
     console.log("Error: ", error);
     return res.status(500).send({ error: "Error at list book" });
