@@ -1,0 +1,92 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Books Store API",
+        "description": "Books Store API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Books Store",
+            "description": "API"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api-store-book/books": {
+            "get": {
+                "description": "Get all books",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Book"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Book": {
+            "required": [
+                "title",
+                "storeCode",
+                "publisher",
+                "author"
+            ],
+            "properties": {
+                "bookId": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "storeCode": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "pages": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "inStock": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "books": {
+            "$ref": "#/definitions/book"
+        }
+    }
+}
