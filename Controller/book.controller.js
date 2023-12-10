@@ -1,6 +1,12 @@
 const queries = require("../db/query");
 const dbConnection = require("../db/connection");
 const Logger = require('../services/logger');
+const auditService = require('../Audit/audit.service');
+const auditAction = require('../Audit/audit.action');
+const util = require('../Util/utilty');
+const { error } = require("winston");
+
+
 
 const logger = new Logger("book.controller");
 module.exports.getBookList = async (req, res) => {
@@ -9,7 +15,10 @@ module.exports.getBookList = async (req, res) => {
     let values = await dbConnection.dbQuery(bookQuery);
     
     if (values.rowCount === 0) throw "No books found";
+
+    auditService.prepareAudit(auditAction.actionList.Get_Books_List ,values.rows,200 , util.dateFormat(),"admin",error)
     logger.info("return Books", values.rows)
+
     return res.status(200).send({ status: true, data: values.rows });
     // return res.status(200).json(JSON.stringify(values.rows));
   } catch (error) {

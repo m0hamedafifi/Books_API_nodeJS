@@ -5,3 +5,7 @@ module.exports.generateStoreCode = ()=> {
 
     return store_code;
 };
+
+module.exports.dateFormat = () => {
+    return new Date(Date.now()).toLocaleString();
+  };

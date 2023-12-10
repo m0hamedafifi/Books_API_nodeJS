@@ -41,4 +41,9 @@ exports.queryList = {
     WHERE BOOK_ID = $1;
     `,
     
+    addAuditAction : `INSERT INTO BMS.AUDIT
+    (AUDIT_ACTION, AUDIT_DATA, STATUS, AUDIT_ERROR, AUDIT_BY, AUDIT_ON)
+    VALUES( $1, $2, $3, $4, $5, $6);`
+
+    
 };

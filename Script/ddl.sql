@@ -47,4 +47,18 @@ CREATE TABLE bms.store (
 
 
 alter table BMS.book
-add column price numeric(5,3)
+add column price numeric(5,3) 
+not null;
+
+
+-- bms.audit table
+create table bms.Audit(
+id serial not null,
+audit_action varchar(200),
+audit_data json ,
+status numeric(3),
+audit_ERROR json,
+audit_by varchar(20),
+audit_on timestamp
+);
+
