@@ -84,9 +84,6 @@
                     "type": "boolean"
                 }
             }
-        },
-        "books": {
-            "$ref": "#/definitions/book"
         }
     }
 }
