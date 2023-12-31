@@ -20,7 +20,7 @@ module.exports.getBookList = async (req, res) => {
     auditService.prepareAudit(auditAction.actionList.Get_Books_List ,values.rows,200 , util.dateFormat(),"admin",error)
     logger.info("return Books", values.rows)
 
-    return res.status(200).send({ status: true, data: values.rows });
+    return res.status(200).send({ status: true, results: values.rows });
     // return res.status(200).json(JSON.stringify(values.rows));
   } catch (error) {
     console.log("Error: ", error);
