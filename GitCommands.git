@@ -72,3 +72,13 @@ $ git pull origin master
 -- To clear timeline 
 $ clear
 
+
+-- Update link remote origin
+$ git remote set-url origin https://github.com/username/repo.git</s>
+
+-- to fetch branch
+$ git fetch origin branch_name:branch_name
+
+-- To see the difference between current and last committed file(s)
+$ git diff
+
