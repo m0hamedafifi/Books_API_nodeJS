@@ -62,3 +62,22 @@ audit_by varchar(20),
 audit_on timestamp
 );
 
+
+-- bms.APP_USERS table
+create table bms.APP_USERS(
+ user_ID serial not null ,
+ Username varchar(50) not null,
+ full_name varchar(200) not null,
+ "password" varchar(200) not null,
+ email varchar (356) not null ,
+ User_type_code varchar(10) not null,
+ user_disabled boolean  default false not null ,
+ verified_user boolean  default false not null,
+ created_by varchar(50) not null ,
+ created_on timestamp not null,
+ updated_by varchar(50) ,
+ updated_on timestamp ,
+ constraint user_pkey primary key (user_ID),
+ constraint user_userName_key unique (Username),
+ constraint user_email_key unique (email)
+);

@@ -43,7 +43,32 @@ exports.queryList = {
     
     addAuditAction : `INSERT INTO BMS.AUDIT
     (AUDIT_ACTION, AUDIT_DATA, STATUS, AUDIT_ERROR, AUDIT_BY, AUDIT_ON)
-    VALUES( $1, $2, $3, $4, $5, $6);`
+    VALUES( $1, $2, $3, $4, $5, $6);` ,
 
+    getUserListQuery : `SELECT USER_ID, USERNAME, FULL_NAME, "password", EMAIL, USER_TYPE_CODE, USER_DISABLED, VERIFIED_USER, CREATED_BY, CREATED_ON, UPDATED_BY, UPDATED_ON
+    FROM BMS.APP_USERS;`,
+
+    getUserByUserName : `SELECT USER_ID, USERNAME, FULL_NAME, "password", EMAIL, USER_TYPE_CODE, USER_DISABLED, VERIFIED_USER, CREATED_BY, CREATED_ON, UPDATED_BY, UPDATED_ON
+    FROM BMS.APP_USERS 
+    WHERE LOWER(USERNAME) = LOWER($1) ;`,
+
+    getUserByEmail : `SELECT USER_ID, USERNAME, FULL_NAME, "password", EMAIL, USER_TYPE_CODE, USER_DISABLED, VERIFIED_USER, CREATED_BY, CREATED_ON, UPDATED_BY, UPDATED_ON
+    FROM BMS.APP_USERS 
+    WHERE LOWER(EMAIL) = LOWER($1) ;`,
+    
+
+    checkUserPassword: `select * from BMS.APP_USERS
+    where username = $1 and password = crypt($2,'password');`,
+
+    insertNewUser: `INSERT INTO BMS.APP_USERS
+    ( USERNAME, FULL_NAME, "password", EMAIL, USER_TYPE_CODE, USER_DISABLED, VERIFIED_USER, CREATED_BY, CREATED_ON )
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8,$9);` ,
+
+    CheckUserNameOrEmailIsExists : `
+    SELECT Count(USER_ID)
+    FROM BMS.APP_USERS 
+    WHERE LOWER(USERNAME) = LOWER($1) 
+    or LOWER(EMAIL) = LOWER($2) ;
+    `
     
 };

@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const storeRouter = require('./Route/store.route');
 const bookRouter = require('./Route/book.route');
+const userRouter = require('./Route/user.route');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => res.json('server started....') )
 // routes middleware
 app.use("/api-store-book", storeRouter);
 app.use("/api-store-book", bookRouter);
+app.use("/api-store-book", userRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => console.log(`server started.... and listening on port ${port}!`))

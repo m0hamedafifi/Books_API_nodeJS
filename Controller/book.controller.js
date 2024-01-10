@@ -33,7 +33,11 @@ module.exports.getBookDetails = async (req, res) => {
     let bookId = req.params.bookId;
     let bookDetailsQuery = queries.queryList.getBookDetailsQuery;
     let values = await dbConnection.dbQuery(bookDetailsQuery,[bookId]);
-
+    if(values.rowCount === 0)
+      {
+      return  res.status(404).send({message :'The requested Book does not exist'});
+      }
+    
     return res.status(200).json(JSON.stringify(values.rows[0]));
   } catch (error) {
     console.log("Error: ", error);
@@ -76,7 +80,7 @@ module.exports.addNewBook = async (req, res) => {
             true
           ]
           console.log(values);
-          let result = await dbConnection.dbQuery(addBookQuery, values);
+          await dbConnection.dbQuery(addBookQuery, values);
         return res
           .status(201)
           .json(`your new book ${bookName} added successfully` );

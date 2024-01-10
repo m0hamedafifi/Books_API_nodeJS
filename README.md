@@ -20,10 +20,26 @@ features used in this project :
 - Unit testing - (mocha)
 - Integration Testing - (supertest)
 - Error handling
+- User Management Module
+    $ register
+    $ login
+    $ Authentication 
+    
+<br/>
 
 To run the application you need to have installed:
 - nodejs 8+
 - npm
 
+To run the server:
+bash
+npm start
+    
+To test the application you can use these commands:
+bash
+npm test
+    
+To see Swagger UI go to :link: http://localhost:3000/api-docs
+    
 sincerely,
 Mohamed Afify.
