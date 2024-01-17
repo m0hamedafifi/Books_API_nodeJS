@@ -49,35 +49,36 @@ module.exports.addUser = async (req, res) => {
     verifiedUser = false,
     createdBy = "admin",
     createdOn = util.dateFormat();
+  
 
   // Validate input
   if (!data || !userName || !password || !email || !fullName) {
     auditLogger.AuditLoggerSubmit(
       "user.controller",
       "add user",
-      [{status:400 , message: "Missing fields!"}],
+      [{status:413 , message: "Missing fields!"}],
       auditAction.actionList.Add_New_User,
-      400,
+      413,
       util.dateFormat(),
       "Postman",
       null
       );
-    return res.status(400).json({ message: "Missing fields!" });
+    return res.status(413).send({status:false, message: "Missing fields!" });
   }
 
   // validate username
 
   if (!validationUtil.validateUserName(userName)) {
     return res
-      .status(400)
-      .json({
+      .status(406)
+      .send({status : false,
         message: `Username should not contain any special characters`,
       });
   }
   // validate Email
 
 if (!validationUtil.isValidEmail(email)) {
-  return res.status(400).json({ message: "Invalid Email Address" });
+  return res.status(406).send({status:false, message: "Invalid Email Address" });
 }
 
 // validate Password
@@ -85,17 +86,17 @@ if (!validationUtil.isValidPassword(password)) {
 
   auditService.prepareAudit( auditAction.actionList.Add_New_User,
     [{data : `${userName} Username already exists.` }],
-    400,
+    406,
     util.dateFormat(),
     "Postman",
     
   );
-  logger.info("add Users", {status : 400 ,data : `The Password must be between 
-  ${validationUtil.minLengthPass} and ${validationUtil.maxLengthPass} characters` });
+  logger.info("add Users", {status : 406 ,data : `The Password must be between 
+  8 and 20 characters` });
 
-  return res.status(400).json({
+  return res.status(406).send({status : false ,
   message: `The Password must be between 
-    ${validationUtil.minLengthPass} and ${validationUtil.maxLengthPass} characters`,
+    8 and 20 characters`,
 });
 }
   // Check username and email is Exist
@@ -113,7 +114,7 @@ if (!validationUtil.isValidPassword(password)) {
       );
     
       logger.info("add Users", {status : 409 ,data : `${userName} Username already exists.` });
-      return res.status(409).json({ message: "Username already exists." });
+      return res.status(409).json({ status : false ,message: "Username already exists." });
     }
 
   let hashedPwd = bcrypt.hashSync(password,10)
@@ -139,9 +140,9 @@ if (!validationUtil.isValidPassword(password)) {
     
   );
 
-  logger.info("Add Users", {status : 201 ,data : `${userName} added successfully` });
+  logger.info("Add Users", {status : 201 ,message : `${userName} added successfully` });
 
-  return res.status(201).send(` new user ${fullName} added successfully`);
+  return res.status(201).send({status : true ,message :` new user ${fullName} added successfully`});
 } catch (error) {
     console.log("Error: ", error);
     return res.status(403).send({ error: "error at add new user " });

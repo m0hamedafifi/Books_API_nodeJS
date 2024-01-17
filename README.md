@@ -25,6 +25,8 @@ features used in this project :
     $ login
     $ Authentication 
     
+- Web Socket io
+
 <br/>
 
 To run the application you need to have installed:

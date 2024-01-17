@@ -82,3 +82,13 @@ $ git fetch origin branch_name:branch_name
 -- To see the difference between current and last committed file(s)
 $ git diff
 
+-- To clean difference
+$ git clean -df
+
+-- to merge from origin
+$ git merge --allow-unrelated-histories FETCH_HEAD
+or 
+$ git merge origin/master
+
+-- to force merge origin
+    $ git merge --overwrite origin/master
