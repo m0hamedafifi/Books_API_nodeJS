@@ -10,6 +10,7 @@ const auditLogger = require('../services/Auditing.Logger.Fun');
 
 const logger = new Logger("user.controller");
 
+// Get all users
 module.exports.getUserList = async (req, res) => {
   try {
     let userQuery = queries.queryList.getUserListQuery;
@@ -50,7 +51,7 @@ module.exports.addUser = async (req, res) => {
     createdBy = "admin",
     createdOn = util.dateFormat();
   
-
+console.log(data);
   // Validate input
   if (!data || !userName || !password || !email || !fullName) {
     auditLogger.AuditLoggerSubmit(
@@ -63,7 +64,7 @@ module.exports.addUser = async (req, res) => {
       "Postman",
       null
       );
-    return res.status(413).send({status:false, message: "Missing fields!" });
+    return res.status(201).send({status:true, message: "Missing fields!" });
   }
 
   // validate username
@@ -85,7 +86,7 @@ if (!validationUtil.isValidEmail(email)) {
 if (!validationUtil.isValidPassword(password)) {
 
   auditService.prepareAudit( auditAction.actionList.Add_New_User,
-    [{data : `${userName} Username already exists.` }],
+    [{data : `${userName} Username or email already exists.` }],
     406,
     util.dateFormat(),
     "Postman",
@@ -114,7 +115,7 @@ if (!validationUtil.isValidPassword(password)) {
       );
     
       logger.info("add Users", {status : 409 ,data : `${userName} Username already exists.` });
-      return res.status(409).json({ status : false ,message: "Username already exists." });
+      return res.status(409).json({ status : false ,message: "Username or email already exists." });
     }
 
   let hashedPwd = bcrypt.hashSync(password,10)
@@ -145,8 +146,10 @@ if (!validationUtil.isValidPassword(password)) {
   return res.status(201).send({status : true ,message :` new user ${fullName} added successfully`});
 } catch (error) {
     console.log("Error: ", error);
-    return res.status(403).send({ error: "error at add new user " });
+    return res.status(403).send({status : false , message: "error at add new user " });
 }
 };
+
+
 
 

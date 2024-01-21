@@ -69,6 +69,23 @@ exports.queryList = {
     FROM BMS.APP_USERS 
     WHERE LOWER(USERNAME) = LOWER($1) 
     or LOWER(EMAIL) = LOWER($2) ;
+    `,
+    CheckUserNAmeExist: `
+    SELECT Count(USER_ID)
+    FROM BMS.APP_USERS 
+    WHERE LOWER(USERNAME) = LOWER($1)
+
+    `,
+    CheckEmailExist: `
+    SELECT Count(USER_ID)
+    FROM BMS.APP_USERS 
+    WHERE LOWER(EMAIL) = LOWER($1)
+    `,
+    SignInQuery:`
+    SELECT USER_ID, USERNAME,"password", EMAIL ,USER_TYPE_CODE
+    FROM BMS.APP_USERS
+    WHERE LOWER(USERNAME) = LOWER($1)
+    or LOWER(EMAIL) = LOWER($1) ;
     `
     
 };

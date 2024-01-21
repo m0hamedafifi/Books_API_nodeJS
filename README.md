@@ -20,6 +20,7 @@ features used in this project :
 - Unit testing - (mocha)
 - Integration Testing - (supertest)
 - Error handling
+- Json Web Token
 - User Management Module
     $ register
     $ login

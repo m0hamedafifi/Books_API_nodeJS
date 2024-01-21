@@ -48,6 +48,9 @@ $ git branch -a
 -- to create branch 
 $ git branch new-branch
 
+-- to know what is my branch 
+$ git branch
+
 -- Switching between branches To switch to branch (if this branch not existing will create new one)
 $ git checkout -b your-branch-name
 
@@ -83,7 +86,9 @@ $ git fetch origin branch_name:branch_name
 $ git diff
 
 -- To clean difference
-$ git clean -df
+$ git reset --hard HEAD
+-- To remove untracked files
+$ git clean -f
 
 -- to merge from origin
 $ git merge --allow-unrelated-histories FETCH_HEAD
@@ -91,4 +96,23 @@ or
 $ git merge origin/master
 
 -- to force merge origin
-    $ git merge --overwrite origin/master
+$ git merge --allow-unrelated-histories -X theirs FETCH_HEAD
+or
+$ git merge --ff origin/master
+-- To abort a conflicting merge
+$ git merge --abort
+
+-- keep your local changes but move them aside temporarily
+$ git stash save "Your commit message here"
+
+-- Apply one or more stashed entries back to your working tree
+$ git stash apply [stash@{0}]
+
+-- list all of your stashed changes
+$ git stash list
+
+-- drop a specific stashed state
+$ git stash drop stash@{0}
+
+-- Drop everything in the stash, leaving nothing.
+$ git stash clear

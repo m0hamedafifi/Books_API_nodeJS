@@ -8,7 +8,7 @@ const db_config = {
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: process.env.PORT,
+  port: process.env.PORTDB,
     // connectionString: process.env.DATABASE_URL,
     connectionTimeoutMillis: 300000,
     idleTimeoutMillis: 300000,
