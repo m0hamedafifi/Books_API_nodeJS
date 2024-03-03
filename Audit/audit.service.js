@@ -2,8 +2,6 @@ const events = require('events');
 const audit = require('..\\Model\\audit.model');
 const queries = require('../db/query');
 const dbConnection = require('../db/connection');
-const { json } = require('body-parser');
-const { error, log } = require('console');
 var eventEmitter = new events.EventEmitter();
 
 const eventName = "audit"

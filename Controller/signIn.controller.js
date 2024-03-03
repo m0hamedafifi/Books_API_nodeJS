@@ -8,7 +8,9 @@ const jwt = require('../Util/jwtUtil');
 //SignIn
 exports.getSignInPage = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const  email  = req.body.Email ,
+    password=req.body.password;
+   
     // validate username or password not empty
     if (!email || !password) {
       return res.status(413).send({ status: false, message: "Missing fields" });
@@ -45,7 +47,7 @@ exports.getSignInPage = async (req, res) => {
     let queryCheckUser = queries.queryList.SignInQuery;
     let dataDB = await dbConnection.dbQuery(queryCheckUser, [email]);
     let dbResponse = dataDB.rows[0];
-    console.log(dbResponse);
+   
     if (dbResponse == null) {
       return res
         .status(402)
@@ -65,13 +67,18 @@ exports.getSignInPage = async (req, res) => {
     }
 
     // generate token
-    let token = jwt.generateToken(dbResponse.user_id,dbResponse.username);
-    console.log(token);
-    res.header("x-auth-login",token)
+    let tokenJwt = jwt.generateToken(dbResponse.user_id,dbResponse.username,dbResponse.is_admin);
+    res.header("x-auth-login-token",tokenJwt)
 
     return res.status(200).send({
         status: true,
-        message: `${dbResponse.username} Logged successfully`
+        message: `${dbResponse.username} Logged successfully`,
+        results : {
+          fname:dbResponse.user_id,
+          lname:dbResponse.username,
+          email:dbResponse.email,
+        },
+        token:tokenJwt
     });
             
   } catch (err) {

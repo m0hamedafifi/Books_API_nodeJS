@@ -81,3 +81,7 @@ create table bms.APP_USERS(
  constraint user_userName_key unique (Username),
  constraint user_email_key unique (email)
 );
+
+
+alter table bms.app_users 
+add column IS_Admin boolean default false not null;

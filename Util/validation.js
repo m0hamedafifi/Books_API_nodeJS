@@ -5,17 +5,18 @@ module.exports.isValidPassword =  (password)=>{
     
     // Add properties to the password validator
     passwordChecker
-    .is().min(8)                     // Minimum length 8
+    .is().min(10)                     // Minimum length 8
     .is().max(20)                   // Maximum length 10
-    .has()
-    .uppercase()                // At least one uppercase letter
-    .lowercase()               // At least one lowercase letter
-    .digits()                   // At least one digit
-    .not()
-    .spaces();                      // Should not contain spaces
+    .has().uppercase()                // At least one uppercase letter
+    .has().lowercase()               // At least one lowercase letter
+    .has().digits()                   // At least one digit
+    .has().not().spaces();                      // Should not contain spaces
     try {
         // Validate the password against the passwordChecker
-        passwordChecker.validate(password);
+        let result = passwordChecker.validate(password,{details:true});
+        if (result.length > 0) {
+            return result;
+        }
         return true;
         } catch (err) {
             console.log("Error at validation  password : "+ err);

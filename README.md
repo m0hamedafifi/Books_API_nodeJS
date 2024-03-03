@@ -22,9 +22,11 @@ features used in this project :
 - Error handling
 - Json Web Token
 - User Management Module
-    $ register
-    $ login
-    $ Authentication 
+    1- register.
+    2- login.
+    3- Authentication.
+- Verification email
+
     
 - Web Socket io
 

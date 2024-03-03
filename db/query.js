@@ -62,7 +62,8 @@ exports.queryList = {
 
     insertNewUser: `INSERT INTO BMS.APP_USERS
     ( USERNAME, FULL_NAME, "password", EMAIL, USER_TYPE_CODE, USER_DISABLED, VERIFIED_USER, CREATED_BY, CREATED_ON )
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8,$9);` ,
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8,$9)
+    RETURNING USER_ID;` ,
 
     CheckUserNameOrEmailIsExists : `
     SELECT Count(USER_ID)
@@ -82,7 +83,7 @@ exports.queryList = {
     WHERE LOWER(EMAIL) = LOWER($1)
     `,
     SignInQuery:`
-    SELECT USER_ID, USERNAME,"password", EMAIL ,USER_TYPE_CODE
+    SELECT USER_ID, USERNAME,"password", EMAIL ,USER_TYPE_CODE,IS_ADMIN
     FROM BMS.APP_USERS
     WHERE LOWER(USERNAME) = LOWER($1)
     or LOWER(EMAIL) = LOWER($1) ;
